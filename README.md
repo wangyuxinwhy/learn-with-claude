@@ -5,3 +5,4 @@
 ## 目录
 
 - [Homebrew](./homebrew/) - 包管理器原理、发布自己的 CLI 工具、GitHub Actions 自动化
+- [Text Diversity](./text-diversity/) - LLM 输出多样性度量：Jaccard、Distinct-n、BLEU/ROUGE、数学推导与 Rust 实现
