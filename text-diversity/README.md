@@ -20,9 +20,7 @@
 
 最简单的词法度量：交集 / 并集
 
-```
-Jaccard(A, B) = |A ∩ B| / |A ∪ B|
-```
+$$Jaccard(A, B) = \frac{|A \cap B|}{|A \cup B|}$$
 
 **局限**：忽略词频，"苹果 苹果 苹果" 和 "苹果" 被视为相同。
 
@@ -30,9 +28,7 @@ Jaccard(A, B) = |A ∩ B| / |A ∪ B|
 
 用词袋向量表示文本，计算向量夹角：
 
-```
-cos(A, B) = (A · B) / (||A|| × ||B||)
-```
+$$\cos(A, B) = \frac{A \cdot B}{\|A\| \times \|B\|}$$
 
 **优势**：保留词频，消除长度影响。
 
@@ -46,9 +42,7 @@ cos(A, B) = (A · B) / (||A|| × ||B||)
 
 整体统计独特 n-gram 的比例：
 
-```
-Distinct-n = 独特 n-gram 数 / 总 n-gram 数
-```
+$$Distinct\text{-}n = \frac{\text{独特 n-gram 数}}{\text{总 n-gram 数}}$$
 
 **特点**：O(n) 复杂度，直接衡量词汇/搭配丰富度。
 
@@ -60,36 +54,24 @@ Distinct-n = 独特 n-gram 数 / 总 n-gram 数
 2. **几何平均**：综合 1-4 gram，任一为 0 则整体为 0
 3. **Brevity Penalty**：惩罚过短的生成
 
-```
-BLEU = BP × exp(Σ wₙ log pₙ)
-```
+$$BLEU = BP \times \exp\left(\sum_n w_n \log p_n\right)$$
 
 ### ROUGE
 
 文本摘要评估指标，核心问"有没有漏"（Recall）：
 
-```
-ROUGE-N = 参考中被匹配的 n-gram 数 / 参考中总 n-gram 数
-```
-
-### Self-* 多样性
-
-将相似度指标转换为多样性指标：
-
-```
-多样性 = 1 - 平均两两相似度
-```
+$$ROUGE\text{-}N = \frac{\text{参考中被匹配的 n-gram 数}}{\text{参考中总 n-gram 数}}$$
 
 ## 数学洞察
 
 **两两距离 vs 到质心距离**
 
-设有 n 个向量 x₁, x₂, ..., xₙ，质心 μ = (1/n) Σxᵢ
+设有 n 个向量 $x_1, x_2, ..., x_n$，质心 $\mu = \frac{1}{n} \sum_i x_i$
 
-- **方差 V** = (1/n) Σ||xᵢ - μ||²（到质心的平均平方距离）
-- **D** = (1/n²) ΣΣ||xᵢ - xⱼ||²（两两平均平方距离）
+- **方差** $V = \frac{1}{n} \sum_i \|x_i - \mu\|^2$（到质心的平均平方距离）
+- **两两距离** $D = \frac{1}{n^2} \sum_i \sum_j \|x_i - x_j\|^2$（两两平均平方距离）
 
-推导得：**D = 2V**
+推导得：$D = 2V$
 
 **结论**：两种方法衡量同一个几何性质（分散程度），选 O(n) 的方差计算。
 
